@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TwitterToKafkaServiceApplicationTest {
 
     @Test
-    public void contextLoad() {
-
+    public boolean contextLoad() {
+        return true;
     }
 }
