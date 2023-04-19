@@ -7,7 +7,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>twitter-to-kafka-service</artifactId>
-    <name>Archetype - twitter-to-kafka-service</name>
+    <name>twitter-to-kafka-service</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
