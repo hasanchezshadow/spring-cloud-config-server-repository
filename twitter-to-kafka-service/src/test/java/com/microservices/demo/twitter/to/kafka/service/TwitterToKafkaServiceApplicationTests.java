@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TwitterToKafkaServiceApplicationTest {
+public class TwitterToKafkaServiceApplicationTests {
 
     @Test
-    public boolean contextLoad() {
-        return true;
+    public void contextLoad() {
+
     }
 }
