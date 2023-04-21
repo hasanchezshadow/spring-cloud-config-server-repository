@@ -1,0 +1,57 @@
+package com.microservices.demo.kafka.producer.config.service.impl;
+
+import com.microservices.demo.kafka.avro.model.TwitterAvroModel;
+import com.microservices.demo.kafka.producer.config.service.KafkaProducer;
+import org.apache.kafka.clients.producer.RecordMetadata;
+import jakarta.annotation.PreDestroy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
+
+@Service
+public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroModel> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TwitterKafkaProducer.class);
+
+    private KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate;
+
+    public TwitterKafkaProducer(KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @Override
+    public void send(String topicName, Long key, TwitterAvroModel message) {
+        LOGGER.info("Sending message='{}' to topic='{}'", message, topicName);
+        CompletableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture = kafkaTemplate.send(topicName, key, message);
+        addCallback(topicName, message, kafkaResultFuture);
+    }
+
+    @PreDestroy
+    public void close() {
+        if (kafkaTemplate != null) {
+            LOGGER.info("Closing kafka producer!");
+            kafkaTemplate.destroy();
+        }
+    }
+
+    private void addCallback(String topicName, TwitterAvroModel message,
+                             CompletableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture) {
+        kafkaResultFuture.whenComplete((longTwitterAvroModelSendResult, throwable) -> {
+            if (throwable != null) {
+                LOGGER.error("Error while sending message {} to topic {}", message.toString(), topicName, throwable);
+            } else {
+                RecordMetadata metadata = longTwitterAvroModelSendResult.getRecordMetadata();
+                LOGGER.debug("Received new metadata. Topic: {}; Partition {}; Offset {}; Timestamp {}, at time {}",
+                        metadata.topic(),
+                        metadata.partition(),
+                        metadata.offset(),
+                        metadata.timestamp(),
+                        System.nanoTime());
+            }
+        });
+    }
+}
