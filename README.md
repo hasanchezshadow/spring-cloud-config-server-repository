@@ -1,5 +1,5 @@
 # Running the application
 - Please enter the correct credentials in twitter4j.properties file.
 - Then run mvn install -DskipTests command
-- Check the docker-compose folder and services.yml file that includes both config server and twitter to kafka service
-- Then go to docker-compose folder and run docker-compose up command to run kafka cluster, config-server and twitter-to-kafka-service 
+- Check new KafkaConsumerConfigData class, then kafka-consumer module, where we added the consumer config. Check also
+the new configuration file in config server repo, config-client-kafka_to_elastic.yml
