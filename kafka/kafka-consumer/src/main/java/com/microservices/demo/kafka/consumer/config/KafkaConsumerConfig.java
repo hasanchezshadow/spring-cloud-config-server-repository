@@ -19,7 +19,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class    KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase> {
+public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
     private final KafkaConfigData kafkaConfigData;
 
