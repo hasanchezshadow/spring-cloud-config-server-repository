@@ -8,7 +8,7 @@ public interface ElasticQueryService {
 
     ElasticQueryServiceResponseModel getDocumentById(String id);
 
-    List<ElasticQueryServiceResponseModel> getDocumentsByText(String text);
+    List<ElasticQueryServiceResponseModel> getDocumentByText(String text);
 
     List<ElasticQueryServiceResponseModel> getAllDocuments();
 }

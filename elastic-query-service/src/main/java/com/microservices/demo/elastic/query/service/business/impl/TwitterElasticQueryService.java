@@ -14,15 +14,16 @@ import java.util.List;
 @Service
 public class TwitterElasticQueryService implements ElasticQueryService {
 
-    private final Logger LOG = LoggerFactory.getLogger(TwitterElasticQueryService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TwitterElasticQueryService.class);
 
     private final ElasticToResponseModelTransformer elasticToResponseModelTransformer;
 
     private final ElasticQueryClient<TwitterIndexModel> elasticQueryClient;
 
-    public TwitterElasticQueryService(ElasticToResponseModelTransformer transformer, ElasticQueryClient<TwitterIndexModel> elasticQueryClient) {
+    public TwitterElasticQueryService(ElasticToResponseModelTransformer transformer,
+                                      ElasticQueryClient<TwitterIndexModel> queryClient) {
         this.elasticToResponseModelTransformer = transformer;
-        this.elasticQueryClient = elasticQueryClient;
+        this.elasticQueryClient = queryClient;
     }
 
     @Override
@@ -32,14 +33,14 @@ public class TwitterElasticQueryService implements ElasticQueryService {
     }
 
     @Override
-    public List<ElasticQueryServiceResponseModel> getDocumentsByText(String text) {
+    public List<ElasticQueryServiceResponseModel> getDocumentByText(String text) {
         LOG.info("Querying elasticsearch by text {}", text);
-        return this.elasticToResponseModelTransformer.getResponseModels(elasticQueryClient.getIndexModelByText(text));
+        return elasticToResponseModelTransformer.getResponseModels(elasticQueryClient.getIndexModelByText(text));
     }
 
     @Override
     public List<ElasticQueryServiceResponseModel> getAllDocuments() {
         LOG.info("Querying all documents in elasticsearch");
-        return this.elasticToResponseModelTransformer.getResponseModels(elasticQueryClient.getAllIndexModels());
+        return elasticToResponseModelTransformer.getResponseModels(elasticQueryClient.getAllIndexModels());
     }
 }
