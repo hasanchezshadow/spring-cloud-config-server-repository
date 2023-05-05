@@ -1,3 +1,7 @@
+logging:
+  level:
+    root: DEBUG
+
 server:
   port: 8185
   servlet:
