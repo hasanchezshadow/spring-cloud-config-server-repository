@@ -3,4 +3,5 @@
 and enter your github password and url on bootstrap.yml file of config-server
 - Then run mvn install -DskipTests command
 - Then run docker-compose up command in docker-compose folder
-- Check analytics-service, where created an api to be queried for analytics data from query service
+- Check gateway-service, where we added an api gateway. 
+- Also check the services.yml file which is updated to use the gateway for all requests
