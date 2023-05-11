@@ -5,6 +5,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import org.apache.http.HttpHeaders;
+import org.slf4j.MDC;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,9 @@ import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
 import java.util.concurrent.TimeUnit;
+
+import static com.microservices.demo.mdc.Constants.CORRELATION_ID_HEADER;
+import static com.microservices.demo.mdc.Constants.CORRELATION_ID_KEY;
 
 @Configuration
 public class WebClientConfig {
