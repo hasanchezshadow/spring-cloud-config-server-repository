@@ -11,4 +11,4 @@ while [[ ! $curlResult == "200" ]]; do
   curlResult=$(curl -s -o /dev/null -I -w "%{http_code}" http://keycloak-authorization-server:9091/auth/realms/microservices-realm)
 done
 
-./cnb/lifecycle/launcher
+./cnb/process/web
