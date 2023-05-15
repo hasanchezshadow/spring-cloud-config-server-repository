@@ -83,6 +83,7 @@ services:
       - "SPRING_ZIPKIN_SENDER_TYPE=kafka"
       - "SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
+      - "SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS=elastic-1:9200"
     networks:
       - ${GLOBAL_NETWORK:-services}
   config-server:
@@ -151,6 +152,7 @@ services:
       - "SPRING_ZIPKIN_SENDER_TYPE=kafka"
       - "SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
+      - "SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS=elastic-1:9200"
     networks:
       - ${GLOBAL_NETWORK:-services}
   elastic-query-service-2:
@@ -192,6 +194,7 @@ services:
       - "SPRING_ZIPKIN_SENDER_TYPE=kafka"
       - "SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
+      - "SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS=elastic-1:9200"
     networks:
       - ${GLOBAL_NETWORK:-services}
   elastic-query-web-client:
