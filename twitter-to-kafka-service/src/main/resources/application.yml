@@ -16,3 +16,5 @@ log:
 
 twitter-to-kafka-service:
   enable-mock-tweets: true
+
+test.key: '{cipher}bb0f4707be41fa106298b4b8494d8c8156ada307e8a39f6a136843aee4dded2c6dcf8293618d888f2dac1e494eb63960'

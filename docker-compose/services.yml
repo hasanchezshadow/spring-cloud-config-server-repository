@@ -34,8 +34,8 @@ services:
       - kafka-broker-3
     environment:
       - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xms128m -Xmx256m"
-      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=error"
-      - "LOGGING_LEVEL_ROOT=error"
+      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
+      - "LOGGING_LEVEL_ROOT=info"
       - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"
       - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0=twitter-topic"
       - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_1=twitter-analytics-topic"
@@ -48,6 +48,7 @@ services:
       - "SPRING_ZIPKIN_BASE-URL=http://zipkin:9411"
       - "SPRING_ZIPKIN_SENDER_TYPE=web"
       - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
+      - "TWITTER_BEARER_TOKEN=${TWITTER_BEARER_TOKEN}"
     networks:
       - ${GLOBAL_NETWORK:-services}
   kafka-to-elastic-service:

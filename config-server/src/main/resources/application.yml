@@ -16,13 +16,14 @@ spring:
           uri: ****
           default-label: main
           username: ****
-          password: '{cipher}****'
+          password: '****'
           clone-on-start: true
     fail-fast: true
   security:
     user:
       name: spring_cloud_user
       password: '{cipher}c0d85293cb01a46b3b629a12e5620f4e9d00d4ede8bdf248cf5b83e23f4536501e4b34a8d56b7a34fcee17aa01d05330'
+#      password: '1234'
 
 log:
   app-name: config-server
