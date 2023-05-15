@@ -63,9 +63,8 @@ public class WebClientConfig {
         return HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, elasticQueryWebClientConfigData.getConnectTimeoutMs())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(
-                            new ReadTimeoutHandler(elasticQueryWebClientConfigData.getReadTimeoutMs(),
-                                    TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new ReadTimeoutHandler(elasticQueryWebClientConfigData.getReadTimeoutMs(),
+                            TimeUnit.MILLISECONDS));
                     connection.addHandlerLast(
                             new WriteTimeoutHandler(elasticQueryWebClientConfigData.getWriteTimeoutMs(),
                                     TimeUnit.MILLISECONDS));

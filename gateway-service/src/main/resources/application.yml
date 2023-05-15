@@ -1,6 +1,9 @@
 logging:
   level.root: DEBUG
 
+server:
+  port: 9092
+
 spring:
   application:
     name: gateway-service

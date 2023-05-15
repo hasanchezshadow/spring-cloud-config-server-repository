@@ -10,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,12 +38,11 @@ public class WebClientConfig {
         return HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, webClientConfig.getConnectTimeoutMs())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(
-                            new ReadTimeoutHandler(webClientConfig.getReadTimeoutMs(),
-                                    TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(
-                            new WriteTimeoutHandler(webClientConfig.getWriteTimeoutMs(),
-                                    TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new ReadTimeoutHandler(webClientConfig.getReadTimeoutMs(),
+                            TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(webClientConfig.getWriteTimeoutMs(),
+                            TimeUnit.MILLISECONDS));
                 });
     }
+
 }
