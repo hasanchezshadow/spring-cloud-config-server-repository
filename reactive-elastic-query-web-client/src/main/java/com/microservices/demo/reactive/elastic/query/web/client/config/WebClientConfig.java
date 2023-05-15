@@ -28,22 +28,23 @@ public class WebClientConfig {
         return WebClient.builder()
                 .baseUrl(webClientConfig.getBaseUrl())
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, webClientConfig.getContentType())
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(getTcpClient())))
+                .clientConnector(new ReactorClientHttpConnector(getHttpClient()))
                 .codecs(configurer -> configurer
                         .defaultCodecs()
                         .maxInMemorySize(webClientConfig.getMaxInMemorySize()))
                 .build();
     }
 
-    private TcpClient getTcpClient() {
-        return TcpClient
-                .create()
+    private HttpClient getHttpClient() {
+        return HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, webClientConfig.getConnectTimeoutMs())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(webClientConfig.getReadTimeoutMs(),
-                            TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(webClientConfig.getWriteTimeoutMs(),
-                            TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(
+                            new ReadTimeoutHandler(webClientConfig.getReadTimeoutMs(),
+                                    TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(
+                            new WriteTimeoutHandler(webClientConfig.getWriteTimeoutMs(),
+                                    TimeUnit.MILLISECONDS));
                 });
     }
 }

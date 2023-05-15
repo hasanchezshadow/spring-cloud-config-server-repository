@@ -25,7 +25,7 @@ public class MDCHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String correlationId = request.getHeader(CORRELATION_ID_HEADER);
-        if (!StringUtils.isEmpty(correlationId)) {
+        if (StringUtils.hasLength(correlationId)) {
             MDC.put(CORRELATION_ID_KEY, correlationId);
         } else {
             MDC.put(CORRELATION_ID_KEY, getNewCorrelationId());

@@ -34,15 +34,15 @@ public class WebClientConfig {
         return WebClient.builder()
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, elasticQueryServiceConfigData.getContentType())
                 .defaultHeader(HttpHeaders.ACCEPT, elasticQueryServiceConfigData.getAcceptType())
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(getTcpClient())))
+                .clientConnector(new ReactorClientHttpConnector(getHttpClient()))
                 .codecs(clientCodecConfigurer ->
                         clientCodecConfigurer
                                 .defaultCodecs()
                                 .maxInMemorySize(elasticQueryServiceConfigData.getMaxInMemorySize()));
     }
 
-    private TcpClient getTcpClient() {
-        return TcpClient.create()
+    private HttpClient getHttpClient() {
+        return HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, elasticQueryServiceConfigData.getConnectTimeoutMs())
                 .doOnConnected(connection -> {
                     connection.addHandlerLast(
