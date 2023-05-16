@@ -1,8 +1,16 @@
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 spring:
+  sleuth:
+    sampler:
+      probability: 1.0
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
   application:
     name: elastic-query-web-client
   profiles:

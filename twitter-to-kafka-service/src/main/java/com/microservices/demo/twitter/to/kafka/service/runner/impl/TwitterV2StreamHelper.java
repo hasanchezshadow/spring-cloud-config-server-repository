@@ -155,7 +155,7 @@ public class TwitterV2StreamHelper {
         HttpEntity entity = response.getEntity();
         if (null != entity) {
             JSONObject json = new JSONObject(EntityUtils.toString(entity, "UTF-8"));
-            if (json.length() > 1) {
+            if (json.length() > 1 && json.has("data")) {
                 JSONArray array = (JSONArray) json.get("data");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject jsonObject = (JSONObject) array.get(i);

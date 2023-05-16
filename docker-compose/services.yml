@@ -232,6 +232,7 @@ services:
       - "EUREKA_CLIENT_SERVICE-URL_DEFAULT-ZONE=http://discovery-service-1:8761/eureka/,http://discovery-service-2:8762/eureka/"
       - "ENCRYPT_KEY=${ENCRYPT_KEY}"
       - "SPRING_ZIPKIN_SENDER_TYPE=kafka"
+      - "SPRING_ZIPKIN_CHECK-TIMEOUT=10000"
       - "SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
       - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
     networks:
